@@ -31,7 +31,7 @@ Chaque type de case présente des spécificités qui peuvent soit aider, soit d�
 
 ## Présentation des cases
 - PLAIN : Les cases PLAIN n’ont aucune influence sur les mouvements de MARC.
-- 
+
 - ERG : Si MARC commence son mouvement depuis une case ERG :
         Son prochain mouvement est réduit :
             Avancer de 10 m et reculer ne produisent aucun déplacement.
