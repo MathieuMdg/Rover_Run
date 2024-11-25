@@ -342,7 +342,7 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
                     break;
 
                 case PLAIN:
-                    printf("Case PLAIN : Les cases PLAIN n'ont aucune influence sur le mouvement de MARC\n\n");
+                    printf("Case PLAIN : Les cases PLAIN n'ont aucune influence sur le mouvement de MARC.\n\n");
                     break;
 
                 case ERG:

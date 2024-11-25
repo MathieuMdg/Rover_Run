@@ -2,3 +2,4 @@
 [/] Ajouter de nouvelles cases (ex : case qui change l'orientation aléatoirement)
 [/] Ajouter les temps de complexités
 [/] Réadapter les fonctions de création de cartes (changer les pourcentages)
+[] Faire un système d'analyse (à chaque mouvement fait pas l'utilisateur affiche les similitudes avec l'arbre créé, si l'utilisateur donne un mouvement autre donne le nouveau meilleur chemin à partir de ce noeud)
