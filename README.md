@@ -27,7 +27,7 @@ Chaque type de case présente des spécificités qui peuvent soit aider, soit d�
 - Simulation d’un environnement martien avec obstacles.
 - Mode de navigation autonome.
 - Options permettant de modifier les conditions de jeu.
-- Chargement et création de cartes martiennes
+- Chargement et création de cartes martiennes.
 
 
 ## Présentation des cases
