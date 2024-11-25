@@ -27,12 +27,13 @@ Chaque type de case présente des spécificités qui peuvent soit aider, soit d�
 - Simulation d’un environnement martien avec obstacles.
 - Mode de navigation autonome.
 - Options permettant de modifier les conditions de jeu.
+- Chargement et création de cartes martiennes
 
 
 ## Présentation des cases
-- PLAIN : Les cases PLAIN n’ont aucune influence sur les mouvements de MARC.
+- **PLAIN** : Les cases PLAIN n’ont aucune influence sur les mouvements de MARC.
 
-- ERG : Si MARC commence son mouvement depuis une case ERG :
+- **ERG** : Si MARC commence son mouvement depuis une case ERG :
         Son prochain mouvement est réduit :
             Avancer de 10 m et reculer ne produisent aucun déplacement.
             Avancer de 20 m n’avance que de 10 m.
@@ -40,22 +41,22 @@ Chaque type de case présente des spécificités qui peuvent soit aider, soit d�
         Les rotations sont limitées :
             Un demi-tour permet de tourner à gauche ou à droite d’un quart de tour seulement.
   
-- REG : Si MARC termine un mouvement sur une case REG :
+- **REG** : Si MARC termine un mouvement sur une case REG :
         Le rover est secoué, ce qui dégrade ses performances.
         MARC ne pourra effectuer que 4 mouvements au total lors de cette phase.
   
-- CREVASSE : Zone extrêmement dangereuse pour MARC :
+- **CREVASSE** : Zone extrêmement dangereuse pour MARC :
         Si le rover passe sur une case CREVASSE, il y tombe et met fin à sa mission.
   
-- PENTE : Lorsque MARC commence une phase sur une case PENTE :
+- **PENTE** : Lorsque MARC commence une phase sur une case PENTE :
         Il glisse automatiquement sur une case adjacente.
         La case sur laquelle il arrive est imprévisible à cause des perturbations de signal.
   
-- ZONE_MORTE : Si MARC commence une phase sur une case ZONE_MORTE :
+- **ZONE_MORTE** : Si MARC commence une phase sur une case ZONE_MORTE :
         Les interférences empêchent les instructions d’arriver correctement.
         MARC s’oriente aléatoirement dans une autre direction.
   
-- ZONE_SOLAIRE : Si MARC commence une phase sur une case ZONE_SOLAIRE :
+- **ZONE_SOLAIRE** : Si MARC commence une phase sur une case ZONE_SOLAIRE :
         L’afflux d’énergie solaire améliore temporairement ses capacités.
         MARC obtient un mouvement supplémentaire pour cette phase.
 
