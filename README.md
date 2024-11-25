@@ -5,12 +5,12 @@ Etudiants : Mathieu MENDOUGA, Noah GUICHARD, Gabriel GENIEZ
 -Lien vers le dépot Gith : https://github.com/MathieuMdg/Rover_Run
 
 ## Cloner le dêpot
-    ```sh
     git clone https://github.com/MathieuMdg/Rover_Run.git
 
 
 ## Présentation du projet
 Le projet Rover_Run est un jeu où les joueurs guident un robot à travers le terrain accidenté de Mars, en essayant d’atteindre une station de base en toute sécurité. Le rover dispose de plusieurs mouvements pour se déplacer sur le sol martien. Il est contrôlé par des saisies utilisateur, ce qui allie prise de décisions stratégiques et mécaniques ludiques pour offrir une expérience de jeu divertissante.
+
 
 ## Contexte du jeu
 MARC, un rover envoyé sur Mars, a perdu son autonomie à la suite de problèmes avec ses systèmes de navigation. Son seul moyen de se déplacer est d’exécuter les ordres envoyés par l’utilisateur. L’objectif est de permettre à MARC (le rover) d’atteindre une base située sur Mars. Pour ce faire, MARC dispose de plusieurs mouvements pour se déplacer sur le sol martien. Une partie se déroule en plusieurs phases :
@@ -21,11 +21,13 @@ MARC, un rover envoyé sur Mars, a perdu son autonomie à la suite de problèmes
 
 Chaque type de case présente des spécificités qui peuvent soit aider, soit désavantager MARC.
 
+
 ## Fonctionnalités
 - Contrôle du rover via des saisies utilisateur.
 - Simulation d’un environnement martien avec obstacles.
 - Mode de navigation autonome.
 - Options permettant de modifier les conditions de jeu.
+
 
 ## Présentation des cases
 - PLAIN : Les cases PLAIN n’ont aucune influence sur les mouvements de MARC.
