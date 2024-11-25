@@ -70,7 +70,7 @@ void afficherDebutPhase(int phase, t_map map, t_localisation robot_loc) {
     printf("          Debut de la phase %d\n", phase);
     printf("=========================================\n\n");
 
-    printf("\n\nAttention Case : %s\n", getSoilAsString(map.soils[robot_loc.pos.y][robot_loc.pos.x]));
+    //printf("\n\nAttention Case : %s\n", getSoilAsString(map.soils[robot_loc.pos.y][robot_loc.pos.x]));
 }
 
 // Affiche la carte avec les coûts de chaque cases
@@ -322,7 +322,9 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
 
             if (map.soils[robot_loc.pos.y][robot_loc.pos.x] == PENTE) {
                 t_position new_pos = getNewPositionOnPente(robot_loc, map);
-                printf("from case %d %d to case %d %d\n\n", robot_loc.pos.x, robot_loc.pos.y, new_pos.x, new_pos.y);
+                printf("Case PENTE : Lorsque MARC commence sa phase sur une case PENTE, il glisse sur une case adjacente. Il est impossible de prévoir la case sur laquelle il arrive avant le déplacement a cause des perturbations de signal.\n");
+                printf("Deplacement effectue : %d %d a la case %d %d\n", robot_loc.pos.x, robot_loc.pos.y, new_pos.x, new_pos.y);
+                printf("Nouvelle case : Case %s\n\n", getSoilAsString(map.soils[robot_loc.pos.y][robot_loc.pos.x]));
 
                 if (isValidLocalisation(new_pos, map.x_max, map.y_max)) {
                     robot_loc = loc_init(new_pos.x, new_pos.y, robot_loc.ori);
@@ -333,24 +335,34 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
 
             switch (map.soils[robot_loc.pos.y][robot_loc.pos.x]) {
                 case REG:
+                    printf("Case REG : Si MARC termine un mouvement sur une case REG, il est secoue et son logiciel fonctionne moins bien. Il n'aura droit qu'a 4 mouvements en tout pour cette phase.\n\n");
                     if (nbMoveSelect > 4) {
                         new_nbMoveSelect = 4;
                     }
                     break;
 
+                case PLAIN:
+                    printf("Case PLAIN : Les cases PLAIN n'ont aucune influence sur le mouvement de MARC\n\n");
+                    break;
+
+                case ERG:
+                    printf("Case ERG : Si MARC commence son mouvement depuis une case Erg, son prochain mouvement est diminue de 1 : Avancer de 10m et Reculer en marche arriere ne font rien, avancer de 20m n'avance que de 10m, avancer de 30m n'avance que de 20m. On ne peut pas tourner par quart de tour, le demi-tour fait tourner a gauche ou a droite d'un quart de tour.\n\n");
+                    break;
+
                 case CREVASSE:
+                    printf("Case CREVASSE : Zone tres peu recommandee pour les rover : si MARC passe sur une case crevasse, il y tombe et termine sa vie de rover.\n\n");
                     robot_signal = 0;
                     break;
 
                 case ZONE_MORTE:
                     robot_loc = loc_init(robot_loc.pos.x, robot_loc.pos.y, rotate(robot_loc.ori, randomNumber(4,6)));
-                    printf("new orientation : %s\n\n", getOrientationAsString(robot_loc.ori));
+                printf("Case ZONE_MORTE : Lorsque MARC commence sa phase sur une case ZONE_MORTE, les interferences empechent les instructions d'arriver correctement a MARC. Il va s'orienter de maniere aleatoire dans une autre direction.\n\n");
+                    printf("Nouvelle orientation : %s\n\n", getOrientationAsString(robot_loc.ori));
                     break;
 
                 case ZONE_SOLAIRE:
                     new_nbMoveSelect = nbMoveSelect + 1;
-                    printf("Ajout d'un mouvement\n\n");
-
+                printf("Case ZONE_SOLAIRE : Lorsque MARC commence sa phase sur une case ZONE_SOLAIRE, l'afflux d'energie solaire augmente les capacites de MARC temporairement. Il obtient ainsi un nouveau mouvement pour cette phase.\n\n");
                 break;
 
                 default:
