@@ -150,7 +150,7 @@ En comptant les saisies utilisateurs et les "_sleep" contenus dans le code (mini
 
 ## Compromis temps/performances
 
-L'étude de complexité et les tests réalisés montrent que l'augmentation du nombre de choix de mouvements (m) ainsi que de la profondeur maximale de l'arbre (d) impacte significativement les temps de calcul et les performances de navigation de MARC. Pour un bon compromis, il est conseillé de limiter la profondeur (d) de l'arbre pour contenir les calculs et d'augmenter modérément (m) pour enrichir les options de MARC.
+L'étude de complexité et les tests réalisés montrent que l'augmentation du nombre de choix de mouvements (m) ainsi que de la profondeur maximale de l'arbre (d) impacte significativement les temps de calcul et les performances de navigation de MARC. Pour un bon compromis, il faut limiter la profondeur (d) de l'arbre pour contenir les calculs et augmenter modérément (m) pour enrichir les options de MARC.
 
 Sur la carte example1.map, en augmentant le nombre de mouvements choisis à 7 tout en maintenant le nombre de mouvements tirés à 9, MARC atteint la base en deux phases en moyenne. Cependant, dans certains cas, il atteint la base dès la première phase ou après la deuxième phase. 
 Les temps enregistrés : 0.079000 secondes (atteinte de la base avant la fin de la phase), 0.109000 secondes, 0.035000 secondes (atteinte avant la fin), et 0.052000 secondes.
