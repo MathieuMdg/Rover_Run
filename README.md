@@ -81,9 +81,9 @@ La complexité de la fonction createTreeV2 peut être analysée comme suit :
 - Définition du nombre de noeuds fils de la racine :  "int nbMove = 1;" Cette opération est de compléxité (O(1)).  
 - Ajout de la racine : "addRoot(tree, ROOT, nbMove, phase_move, loc, map);" Cette opération est (O(1)) car elle ne dépend pas de la taille de l'entrée.  
 - Appel de la fonction récursive pour la création de tous les noeuds : "addNodeRecV2(tree, tree->root, map, max_depth);" La complexité de cette opération dépend de la complexité de addNodeRecV2.  
-- Complexité de addNodeRecV2 : La fonction addNodeRecV2 est une fonction récursive qui parcourt tous les noeuds de l'arbre jusqu'à une profondeur maximale max_depth. Si chaque noeud a en moyenne k fils, la complexité de cette fonction est (O(k^{max_depth})).
+- Complexité de addNodeRecV2 : La fonction addNodeRecV2 est une fonction récursive qui parcourt tous les noeuds de l'arbre jusqu'à une profondeur maximale max_depth. Pour la méthode 2 chaque noeud possède 1 fils donx la complexité de cette fonction est (O(1^{max_depth})).
 
-En combinant toutes ces opérations, la complexité totale de la fonction createTreeV2 est dominée par la complexité de addNodeRecV2, ce qui donne une complexité de (O(k^{max_depth})).
+En combinant toutes ces opérations, la complexité totale de la fonction createTreeV2 est dominée par la complexité de addNodeRecV2, ce qui donne une complexité de (O(1)).
 
 Temps d'exécution de createTreeV2: <0.000000 secondes (Test éfféctué avec les fonctions de la librairie <time.h>).
 
@@ -117,8 +117,6 @@ Temps d'exécution de findNode: <0.000000 secondes (Test éfféctué avec les fo
 
 ### Automatique
 
-
-
 - La boucle principale "while" continue tant que le robot n'a pas atteint la base et que le signal du robot est actif. Sa complexité dépend du nombre de mouvements nécessaires pour atteindre la base.
 - Boucle for pour sélectionner les mouvements. Cette boucle s'exécute nbMaxMove fois et est donc de complexité O(nbMaxMove).
 - Appel de createTree ou createTreeV2, La complexité dépend de la profondeur maximale de l'arbre (max_depth), du nombre de mouvements disponibles (nbMoveSelect) et de la méthode de construction utilisée.
@@ -137,7 +135,7 @@ La complexité totale du code est approximativement O(n * d * m), où n est le n
 ### Manuel
   
 La boucle "while(rep < new_nbMoveSelect && robot_signal == 1 && (robot_loc.pos.x != base_station_loc.x || robot_loc.pos.y != base_station_loc.y))" dépend de new_nbMoveSelect, robot_signal, et la position du robot par rapport à la base. Supposons que cette boucle s'exécute N fois.
-À l'intérieur de la boucle principale:  )
+À l'intérieur de la boucle principale: 
 - afficherMouvements(): O(M) où M est la taille de move_list
 - isEltInList(): O(M) dans le pire des cas (parcours de la liste)
 - removeElt(): O(M) dans le pire des cas (parcours de la liste)
