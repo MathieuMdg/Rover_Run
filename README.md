@@ -158,7 +158,7 @@ Lorsque le nombre de mouvements tirés est augmenté à 12, tout en conservant l
 
 Enfin, en augmentant à la fois le nombre de mouvements tirés à 12 et le nombre de mouvements choisis à 7, MARC atteint généralement la base en une ou deux phases, mais des variations sont notées. Les temps enregistrés témoignent de cette dispersion : 5.792000 secondes, 1.415000 secondes (atteinte avant la fin de la phase), 0.171000 secondes, 3.790000 secondes, 1.333000 secondes (atteinte avant la fin), 1.509000 secondes (atteinte avant la fin), et 2.683000 secondes.
 
-Les résultats montrent que l’augmentation du nombre de mouvements tirés et/ou choisis influence significativement le parcours de MARC. Plus ces valeurs sont élevées, plus l’arbre des possibilités est grand, ce qui peut améliorer la performance globale mais augmente légèrement le temps de calcul dans certains cas. L’équilibre optimal dépend des contraintes spécifiques de chaque configuration de carte (point de départ, cases rencontrées, coordonnées de la base, ...).
+Les résultats montrent que l’augmentation du nombre de mouvements tirés et choisis influence significativement le parcours de MARC. Plus ces valeurs sont élevées, plus l’arbre des possibilités est grand, ce qui peut améliorer la performance globale mais augmente légèrement le temps de calcul dans certains cas. L’équilibre optimal dépend des contraintes spécifiques de chaque configuration de carte (point de départ, cases rencontrées, coordonnées de la base, ...).
 
 
 
