@@ -286,12 +286,6 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
 
     printf("\n\n\n");
 
-    // Initialiser la location du robot pour le chemin automatique
-    t_localisation root_loc_auto = loc_init(x_init, y_init, orientation_init);
-
-    // Initialiser la location du robot pour le chemin manuel
-    t_localisation root_loc = loc_init(x_init, y_init, orientation_init);
-
     while (running == 0) {
 
         int robot_signal = 1;

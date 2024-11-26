@@ -14,9 +14,6 @@ int main() {
     // Déclaration d'une variable t_map
     t_map map;
 
-    // Fonction pour créer une carte aléatoirement (peut faire crash le programme de temps en temps)
-    createRandomMap("..\\maps\\example2.map", randomNumber(7, 16), randomNumber(6, 15));
-
     // The following preprocessor directive checks if the code is being compiled on a Windows system.
     // If either _WIN32 or _WIN64 is defined, it means we are on a Windows platform.
     // On Windows, file paths use backslashes (\), hence we use the appropriate file path for Windows.
