@@ -89,7 +89,7 @@ Temps d'exécution de createTreeV2: <0.000000 secondes (Test éfféctué avec le
 
 ### La phase de recherche d’une feuille de valeur minimale parmi toutes les feuilles de l’arbre
 
-### Méthode 1
+#### Méthode 1
 La complexité de la fonction "searchBetterPathNode" dépend de la structure de l'arbre.
 - Boucle While :  La boucle "while(node != searchBetterNode(node))" parcourt les nœuds de l'arbre jusqu'à ce qu'un nœud feuille soit atteint. Dans le pire des cas, cette boucle traverse la hauteur de l'arbre en entier, qui est (O(h)), où (h) est la hauteur de l'arbre.
 - Appel de fonction searchBetterNode : Dans la boucle while, "searchBetterNode(node") est appelé. Cette fonction parcourt tous les enfants d'un nœud pour trouver celui avec le coût minimum. Si un nœud a (k) enfants, la complexité de "searchBetterNode" est (O(k)).
@@ -98,17 +98,11 @@ Par conséquent, la complexité totale est (O(h * k)), où (h) est la hauteur de
 
 Temps d'exécution de searchBetterPathNode: <0.000000 secondes (Test éfféctué avec les fonctions de la librairie <time.h>).
 
+#### Méthode 2
+La fonction printLastNodeTreeV2 a une complexité de (O(d)), où (d) est la profondeur de l'arbre. La boucle while parcourt les nœuds de l'arbre jusqu'au dernier noeud (noeud fueille). Dans le pire des cas, cette boucle itère une fois pour chaque niveau de l'arbre, ce qui donne une complexité de (O(d)), où (d) est la profondeur de l'arbre.
+Ainsi, la complexité totale de la fonction est (O(d)).
 
-
-
-Méthode 2
-La fonction printLastNodeTreeV2 a une complexité temporelle de (O(d)), où (d) est la profondeur de l'arbre.  Voici l'analyse de la complexité :  
-Initialisation: L'initialisation de node à tree.root est une opération (O(1)).
-Boucle while: La boucle while parcourt les nœuds de l'arbre tant que le nœud courant a exactement un fils. Dans le pire des cas, cette boucle itère une fois pour chaque niveau de l'arbre, ce qui donne une complexité de (O(d)), où (d) est la profondeur de l'arbre.
-Retour: Le retour de node est une opération (O(1)).
-Ainsi, la complexité temporelle totale de la fonction est (O(d)).
-
-Temps d'exécution de printLastNodeTreeV2: <0.000000 secondes
+Temps d'exécution de printLastNodeTreeV2: <0.000000 secondes (Test éfféctué avec les fonctions de la librairie <time.h>).
 
 
 
