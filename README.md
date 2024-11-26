@@ -34,11 +34,11 @@ Chaque type de case présente des spécificités qui peuvent soit aider, soit d�
 - **PLAIN** : Les cases PLAIN n’ont aucune influence sur les mouvements de MARC.
 
 - **ERG** : Si MARC commence son mouvement depuis une case ERG :
-        Son prochain mouvement est réduit :
+        - Son prochain mouvement est réduit :
             Avancer de 10 m et reculer ne produisent aucun déplacement.
             Avancer de 20 m n’avance que de 10 m.
             Avancer de 30 m n’avance que de 20 m.
-        Les rotations sont limitées :
+        - Les rotations sont limitées :
             Un demi-tour permet de tourner à gauche ou à droite d’un quart de tour seulement.
   
 - **REG** : Si MARC termine un mouvement sur une case REG :
