@@ -104,6 +104,53 @@ Ainsi, la complexité totale de la fonction est (O(d)).
 
 Temps d'exécution de printLastNodeTreeV2: <0.000000 secondes (Test éfféctué avec les fonctions de la librairie <time.h>).
 
+### Calcul du chemin de la racine vers cette feuille
+
+La complexité de la fonction findNode peut être analysée comme suit : 
+La boucle for sur la profondeur s'exécute depth fois. À chaque itération de cette boucle, il y a une boucle interne qui parcourt les fils du noeud actuel. Cette boucle interne s'exécute nbSons fois, où nbSons est le nombre de fils du noeud actuel.
+La boucle interne est imbriquée dans la boucle externe. Donc, la complexité de la boucle interne est (O(nbSons)) et celle de la boucle externe est (O(depth)).
+La complexité totale de la fonction est donc (O(depth * nbSons)).
+
+Temps d'exécution de findNode: <0.000000 secondes (Test éfféctué avec les fonctions de la librairie <time.h>).
+
+### Un exemple complet de guidage de MARC depuis sa position d’origine vers la station de base
+
+### Automatique
+
+
+
+- La boucle principale "while" continue tant que le robot n'a pas atteint la base et que le signal du robot est actif. Sa complexité dépend du nombre de mouvements nécessaires pour atteindre la base.
+- Boucle for pour sélectionner les mouvements. Cette boucle s'exécute nbMaxMove fois et est donc de complexité O(nbMaxMove).
+- Appel de createTree ou createTreeV2, La complexité dépend de la profondeur maximale de l'arbre (max_depth), du nombre de mouvements disponibles (nbMoveSelect) et de la méthode de construction utilisée.
+- Appel de searchBetterPathNode ou printLastNodeTreeV2, la complexité dépend de la taille de l'arbre.
+La complexité totale du code est principalement déterminée par la boucle principale et les appels de fonctions récursives pour créer et parcourir l'arbre. Si d est la profondeur maximale de l'arbre et m est le nombre de mouvements disponibles, la complexité peut être approximée comme suit:  
+Boucle principale: O(n) où n est le nombre de mouvements nécessaires pour atteindre la base.
+Création de l'arbre: O(d * m)
+Recherche du chemin: O(d * m)
+
+Conclusion
+La complexité totale du code est approximativement O(n * d * m), où n est le nombre de mouvements nécessaires pour atteindre la base, d est la profondeur maximale de l'arbre, et m est le nombre de mouvements disponibles.
+
+9.107000 secondes total en comptant les saisies utilisateurs et les "_sleep" contenus dans le code (minimum 7 secondes) - une seule phase
+
+
+### Manuel
+  
+La boucle "while(rep < new_nbMoveSelect && robot_signal == 1 && (robot_loc.pos.x != base_station_loc.x || robot_loc.pos.y != base_station_loc.y))" dépend de new_nbMoveSelect, robot_signal, et la position du robot par rapport à la base. Supposons que cette boucle s'exécute N fois.
+À l'intérieur de la boucle principale:  )
+- afficherMouvements(): O(M) où M est la taille de move_list
+- isEltInList(): O(M) dans le pire des cas (parcours de la liste)
+- removeElt(): O(M) dans le pire des cas (parcours de la liste)
+- printPath(): O(D) où D est la profondeur du noeud
+
+En résumé, la complexité de la boucle principale est dominée par les opérations sur move_list, ce qui donne une complexité de O(N * M) où N est le nombre d'itérations de la boucle principale et M est la taille de move_list.
+
+Temps d'exécution : 13.845000 secondes - 2 phases avant fin d'execution
+Temps d'exécution : 10.069000 secondes - 1 seule phase avec perte du signal à la fin
+
+En comptant les saisies utilisateurs et les "_sleep" contenus dans le code (minimum 7 secondes).
+
+
 
 
 
