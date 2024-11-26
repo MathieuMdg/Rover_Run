@@ -69,8 +69,6 @@ void afficherDebutPhase(int phase, t_map map, t_localisation robot_loc) {
     printf("=========================================\n");
     printf("          Debut de la phase %d\n", phase);
     printf("=========================================\n\n");
-
-    //printf("\n\nAttention Case : %s\n", getSoilAsString(map.soils[robot_loc.pos.y][robot_loc.pos.x]));
 }
 
 // Affiche la carte avec les coûts de chaque cases
@@ -99,23 +97,10 @@ void afficherResultats(int success) {
         printf("MISSION ECHOUEE : le robot est perdu ou detruit\n");
     }
         printf("===============================================\n\n");
-    _sleep(6000);
+    _sleep(5000);
     for (int i = 0; i < 15; i++) {
         printf("\n\n\n");
     }
-}
-
-void afficherProgression(int pourcentage) {
-    printf("[");
-    int completed = pourcentage / 10; // Une case pour chaque 10%
-    for (int i = 0; i < 10; i++) {
-        if (i < completed) {
-            printf("#"); // Rempli
-        } else {
-            printf(" "); // Vide
-        }
-    }
-    printf("] %d%%\n", pourcentage);
 }
 
 // Affiche le menu du jeu
@@ -260,13 +245,13 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
 
     // Exemple de tableau d'éléments avec leurs pourcentages initiaux
     tabMove items[] = {
-            {F_10, 20.0},
-            {F_20, 15.0},
-            {F_30, 20.0},
-            {B_10, 15.0},
-            {T_RIGHT, 10.0},
-            {T_LEFT, 10.0},
-            {U_TURN, 10.0}
+            {F_10, 22},
+            {F_20, 15},
+            {F_30, 7},
+            {B_10, 7},
+            {T_RIGHT, 21},
+            {T_LEFT, 21},
+            {U_TURN, 7}
     };
 
     // Nombre de mouvements au total
@@ -313,6 +298,7 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
 
         while ((robot_loc.pos.x != base_station_loc.x || robot_loc.pos.y != base_station_loc.y) && robot_signal == 1) {
 
+            // Nombre de mouvement pouvant être effectués (est amené à changer)
             int new_nbMoveSelect = nbMoveSelect;
 
             // Afficher le message de début de phase
@@ -320,22 +306,32 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
 
             _sleep(1000);
 
+            // Pour le cas où MARC commence sa phase sur une case PENTE
             if (map.soils[robot_loc.pos.y][robot_loc.pos.x] == PENTE) {
+
                 t_position new_pos = getNewPositionOnPente(robot_loc, map);
                 printf("Case PENTE : Lorsque MARC commence sa phase sur une case PENTE, il glisse sur une case adjacente. Il est impossible de prévoir la case sur laquelle il arrive avant le déplacement a cause des perturbations de signal.\n");
                 printf("Deplacement effectue : %d %d a la case %d %d\n", robot_loc.pos.x, robot_loc.pos.y, new_pos.x, new_pos.y);
                 printf("Nouvelle case : Case %s\n\n", getSoilAsString(map.soils[robot_loc.pos.y][robot_loc.pos.x]));
 
+                // Vérifier si la nouvelle position est valide
                 if (isValidLocalisation(new_pos, map.x_max, map.y_max)) {
+
+                    // Mettre à jour la position du robot
                     robot_loc = loc_init(new_pos.x, new_pos.y, robot_loc.ori);
                 } else {
+
+                    // Si la nouvelle position n'est pas valide, le contact avec le robot est perdu
                     robot_signal = 0;
                 }
             }
 
+            // Pour les autres cas (y compris le cas où MARC glisse sur une case)
             switch (map.soils[robot_loc.pos.y][robot_loc.pos.x]) {
                 case REG:
                     printf("Case REG : Si MARC termine un mouvement sur une case REG, il est secoue et son logiciel fonctionne moins bien. Il n'aura droit qu'a 4 mouvements en tout pour cette phase.\n\n");
+
+                    // Limiter le nombre de mouvements possibles à 4 (case REG)
                     if (nbMoveSelect > 4) {
                         new_nbMoveSelect = 4;
                     }
@@ -351,24 +347,31 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
 
                 case CREVASSE:
                     printf("Case CREVASSE : Zone tres peu recommandee pour les rover : si MARC passe sur une case crevasse, il y tombe et termine sa vie de rover.\n\n");
+
+                    // Si MARC tombe dans une crevasse, le signal est perdu
                     robot_signal = 0;
                     break;
 
                 case ZONE_MORTE:
+
+                    // MARC s'oriente de manière aléatoire dans une autre direction
                     robot_loc = loc_init(robot_loc.pos.x, robot_loc.pos.y, rotate(robot_loc.ori, randomNumber(4,6)));
-                printf("Case ZONE_MORTE : Lorsque MARC commence sa phase sur une case ZONE_MORTE, les interferences empechent les instructions d'arriver correctement a MARC. Il va s'orienter de maniere aleatoire dans une autre direction.\n\n");
+                    printf("Case ZONE_MORTE : Lorsque MARC commence sa phase sur une case ZONE_MORTE, les interferences empechent les instructions d'arriver correctement a MARC. Il va s'orienter de maniere aleatoire dans une autre direction.\n\n");
                     printf("Nouvelle orientation : %s\n\n", getOrientationAsString(robot_loc.ori));
                     break;
 
                 case ZONE_SOLAIRE:
+
+                    // MARC obtient un mouvement bonus pour cette phase
                     new_nbMoveSelect = nbMoveSelect + 1;
-                printf("Case ZONE_SOLAIRE : Lorsque MARC commence sa phase sur une case ZONE_SOLAIRE, l'afflux d'energie solaire augmente les capacites de MARC temporairement. Il obtient ainsi un nouveau mouvement pour cette phase.\n\n");
-                break;
+                    printf("Case ZONE_SOLAIRE : Lorsque MARC commence sa phase sur une case ZONE_SOLAIRE, l'afflux d'energie solaire augmente les capacites de MARC temporairement. Il obtient ainsi un nouveau mouvement pour cette phase.\n\n");
+                    break;
 
                 default:
                     break;
             }
 
+            // Vérifie que le signal du robot est toujours actif
             if(robot_signal != 0) {
 
                 // Afficher les informations du robot
@@ -376,7 +379,7 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
 
                 _sleep(1000);
 
-
+                // Créer une liste vide pour stocker les mouvements
                 h_std_list *move_list = createListEmpty();
 
                 // Sélectionner n éléments
@@ -388,11 +391,6 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
                     // Ajouter l'éléments dans la liste
                     addTailList(move_list, selected);
                 }
-
-                //for(int i = 0; i< 11; i++) {
-                //afficherProgression(i*10);
-                //_sleep(500);
-                //}
 
                 // Affiche les mouvements disponibles
                 afficherMouvements(*move_list, new_nbMoveSelect);
@@ -412,11 +410,13 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
 
                 if (guidage == 'Y') {
 
+                    // Création de l'arbre de phase
                     p_tree ptr_phase_tree_auto;
-
                     p_node node;
 
+                    // En focntion de la méthode choisie
                     if (methode == 1) {
+
                         // Création de l'arbre de phase (Méthode 1)
                         ptr_phase_tree_auto = createTree(move_list, map, robot_loc, new_nbMoveSelect);
 
@@ -432,6 +432,7 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
                         node = printLastNodeTreeV2(*ptr_phase_tree_auto);
                     }
 
+                    // Si le coût du chemin est supérieur à 12999 (cas d'une crevasse), le signal du robot est perdu
                     if (node->case_cost > 12999) {
                         robot_signal = 0;
                     } else {
@@ -461,6 +462,10 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
                         _sleep(1000);
                     }
 
+                    if (ptr_phase_tree_auto != NULL) {
+                        deleteTree(ptr_phase_tree_auto);
+                    }
+
                 } else {
 
                     // Création de l'arbre de phase manuel
@@ -478,6 +483,7 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
                     // Déclaration du noeud pour parcourir l'arbre
                     p_node node = phase_tree_manuel.root;
 
+                    // Détermine le nombre de fois que l'utilisateur à choisi un mouvement
                     int rep = 0;
 
                     // Tant que le nombre de mouvements à sélectionner n'est pas atteint, que le robot n'est pas hors signal (détruit ou sorti de la carte) et que le robot n'est pas arrivé aux coordonnées de la base
@@ -541,12 +547,11 @@ void jouer(t_map map, int nbMaxMove, int nbMoveSelect, int methode) {
                         // Augmenter le nombre de mouvements éxecuté
                         rep++;
 
-
-
                     }
 
                     // Augmenter le numéro de phase
                     numero_phase++;
+
                 }
 
                 if (robot_loc.pos.x != base_station_loc.x || robot_loc.pos.y != base_station_loc.y) {

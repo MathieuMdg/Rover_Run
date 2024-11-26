@@ -30,7 +30,7 @@ typedef enum e_move
 
 typedef struct {
     t_move element;
-    double percentage;  // Le pourcentage de probabilité de l'élément
+    int avail;  // Le nombre d'élément disponible
 } tabMove;
 
 /**

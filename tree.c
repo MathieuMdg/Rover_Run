@@ -20,7 +20,6 @@ void deleteTree(p_tree tree) {
     if (tree->root != NULL) {
         deleteNode(tree->root);
         free(tree);
-        printf("Arbre supprimé\n");
     }
 }
 
@@ -571,3 +570,4 @@ p_node printLastNodeTreeV2(t_tree tree) {
 
     return node;
 }
+

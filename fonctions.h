@@ -27,9 +27,6 @@ void afficherCarteAvecCouts(t_map map);
 // Affiche le résultat de fin de phase
 void afficherResultats(int success);
 
-// Affiche la progression d'une tâche
-void afficherProgression(int pourcentage);
-
 // Affiche le menu du jeu
 void afficherMenu(t_map* map, int* nbMaxMove, int* nbMoveSelect, int* methode);
 

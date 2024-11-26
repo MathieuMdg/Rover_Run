@@ -168,6 +168,7 @@ t_move findElt(h_std_list list, int nb) {
 
 }
 
+// Vérifier si un élément est dans la liste
 int isEltInList(h_std_list list, t_move move) {
 
     p_cell tmp = list.head;

@@ -157,7 +157,7 @@ t_move selectRandomMove(tabMove move[], int size) {
 
     // Calcul le pourcentage total des éléments
     for (int i = 0; i < size; i++) {
-        sum += move[i].percentage;
+        sum += move[i].avail;
     }
 
     // Générer un nombre aléatoire entre 0 et la somme des pourcentages
@@ -166,11 +166,11 @@ t_move selectRandomMove(tabMove move[], int size) {
     // Sélection de l'élément
     double cumulative = 0.0;
     for (int i = 0; i < size; i++) {
-        cumulative += move[i].percentage;
+        cumulative += move[i].avail;
         if (random <= cumulative) {
 
             // Réduire le pourcentage de l'élément sélectionné (encore à déterminer)
-            move[i].percentage *= 0.9;
+            move[i].avail = move[i].avail - 1;
             return move[i].element;
         }
     }

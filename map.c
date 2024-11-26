@@ -328,7 +328,11 @@ void createRandomMap(char *filename, int ydim, int xdim) {
                 value = 0;
             }
             else {
+
+                // Sélection aléatoire d'un sol
                 value = selectRandomSoils(item_soils, 8);
+
+                // Si la base est sortie, on met sa probabilité à 0 (il ne doit y avoir qu'une seule base)
                 if (value == 0) {
                     item_soils[4].percentage = 0.0;
                 }
