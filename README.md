@@ -60,9 +60,34 @@ Chaque type de case présente des spécificités qui peuvent soit aider, soit d�
         L’afflux d’énergie solaire améliore temporairement ses capacités.
         MARC obtient un mouvement supplémentaire pour cette phase.
 
-  ## Étude de Complexité
+## Étude de Complexité
 
-  ### Phase de construction de l'arbre
+### Phase de construction de l'arbre
+
+#### Méthode 1 
+La complexité de la fonction **createTree** dépend de la complexité des fonctions countEltHList, addRoot et addNodeRec :
+- countEltHList(*phase_move) : Cette fonction compte les éléments d'une liste, sa complexité est (O(n)), où (n) est le nombre d'éléments dans phase_move.  
+- addRoot(tree, ROOT, nbMove, phase_move, loc, map) : Cette fonction ajoute une racine à l'arbre. Elle effectue des opérations constantes, sa complexité est (O(1)).  
+- addNodeRec(tree, tree->root, map, max_depth) : Cette fonction est récursive et construit l'arbre. La complexité dépend de la profondeur maximale de l'arbre (max_depth) et du nombre de nœuds fils par nœud. Si chaque nœud a en moyenne (k) fils et que l'arbre a une profondeur maximale de (d), la complexité est (O(k^d)).  
+
+En combinant ces éléments, la complexité globale de la fonction createTree est dominée par la complexité de addNodeRec, ce qui donne une complexité de (O(k^d)), où (k) est le nombre moyen de fils par nœud et (d) est la profondeur maximale de l'arbre.
+
+Temps d'exécution de createTree: 0.001000 secondes (Test éfféctué avec les fonctions de la librairie <time.h>).
+
+#### Méthode 2
+La complexité de la fonction createTreeV2 peut être analysée comme suit :  
+- Allocation mémoire pour l'arbre vide : "p_tree tree = (p_tree) malloc(sizeof(t_tree));" Cette opération est de compléxité (O(1)).  
+- Initialisation de l'arbre vide : "*tree = createEmptyTree();" Cette opération est de complexité (O(1)).  
+- Définition du nombre de noeuds fils de la racine :  "int nbMove = 1;" Cette opération est de compléxité (O(1)).  
+- Ajout de la racine : "addRoot(tree, ROOT, nbMove, phase_move, loc, map);" Cette opération est (O(1)) car elle ne dépend pas de la taille de l'entrée.  
+- Appel de la fonction récursive pour la création de tous les noeuds : "addNodeRecV2(tree, tree->root, map, max_depth);" La complexité de cette opération dépend de la complexité de addNodeRecV2.  
+- Complexité de addNodeRecV2 : La fonction addNodeRecV2 est une fonction récursive qui parcourt tous les noeuds de l'arbre jusqu'à une profondeur maximale max_depth. Si chaque noeud a en moyenne k fils, la complexité de cette fonction est (O(k^{max_depth})).
+
+En combinant toutes ces opérations, la complexité totale de la fonction createTreeV2 est dominée par la complexité de addNodeRecV2, ce qui donne une complexité de (O(k^{\text{max_depth}})).
+
+Temps d'exécution de createTreeV2: <0.000000 secondes (Test éfféctué avec les fonctions de la librairie <time.h>).
+
+
 
 
   
